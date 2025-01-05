@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        caudex: ['Caudex', 'serif'], // Add Caudex to your theme
+      }
     },
   },
   plugins: [],

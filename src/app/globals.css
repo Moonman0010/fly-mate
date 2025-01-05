@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,15 +11,32 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: rgb(253, 225, 0);
+    --foreground: #171717;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-caudex;
+}
+
+.first-container {
+  display: grid;
+  grid-template-rows: 100px 1fr; /* Sets the heights of the rows */
+  grid-template-columns: minmax(4%, 80px) auto minmax(4%, 80px); /* Sets columns */
+  gap: 20px;
+}
+
+.second-container {
+  display: grid;
+  grid-template-rows: 10px 1fr; /* Sets the heights of the rows */
+  grid-template-columns: minmax(4%, 80px) auto minmax(4%, 80px); /* Sets columns */
+}
+
+.odd{
+  background-color: #000000;
 }
 
 @layer utilities {
