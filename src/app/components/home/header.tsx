@@ -1,6 +1,6 @@
 const Header = () => {
     return (
-      <header className="flex items-center justify-between px-6 py-4 bg-transparent shadow-md">
+      <header className="flex items-center justify-between px-6 md:px-10 lg:px-12 py-4 bg-transparent shadow-md">
         <div className="flex items-center gap-4">
           <img src="/icon.ico" alt="Fly Mate Logo" width={50} height={50} />
           <h1 className="text-3xl font-bold">Fly Mate</h1>
