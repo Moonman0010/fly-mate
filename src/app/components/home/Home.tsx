@@ -1,6 +1,7 @@
 import Header from "./header";
 import Tagline from "./tagline";
 import FlyMatePoster from "./poster";
+import About from"./about";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Header />
       <Tagline />
       <FlyMatePoster />
+      <About/>
     </div>
   );
 }
