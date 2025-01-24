@@ -75,7 +75,7 @@ const Header = () => {
           </a>
           <a
             href="#features"
-            className="text-white font-bold hover:bg-gray-500 px-3 py-2 transition rounded-md"
+            className="text-white font-bold hover:gbg-gray-500 px-3 py-2 transition rounded-md"
             onClick={() => setIsOpen(false)}
           >
             Features

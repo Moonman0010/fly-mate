@@ -14,7 +14,10 @@ const config: Config = {
       },
       fontFamily: {
         caudex: ['Caudex', 'serif'], // Add Caudex to your theme
-      }
+      },
+      spacing: {
+        50: '12.5rem', // 200px
+      },
     },
   },
   plugins: [],
