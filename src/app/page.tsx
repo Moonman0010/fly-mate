@@ -1,8 +1,8 @@
-import Home from "./components/home/Home"
+import HomePage from "./home/page";
 export default function page() {
   return (
     <div>
-      <Home />
+      <HomePage />
     </div>
   );
 }

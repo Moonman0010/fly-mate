@@ -1,11 +1,11 @@
 import Header from "../shared/header";
-import Tagline from "./tagline";
-import FlyMatePoster from "./poster";
-import About from"./about";
-import FAQ from "./faq";
+import Tagline from "../components/home/tagline";
+import FlyMatePoster from "../components/home/poster";
+import About from"../components/home/about";
+import FAQ from "../components/home/faq";
 import Footer from "../shared/footer";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="min-h-screen bg-yellow-300">
       <Header />
@@ -18,4 +18,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default HomePage;

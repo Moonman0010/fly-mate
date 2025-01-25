@@ -1,8 +1,8 @@
 import Header from "../shared/header";
 import Footer from "../shared/footer";
-import FlightNumber from "./flightNumber";
+import FlightNumber from "../components/flightnumber/flightForm";
 
-const Page= () => {
+const FlightNumberPage= () => {
     return (
         <div>
             <Header /> {/* Reusing the existing Header component */}
@@ -12,4 +12,4 @@ const Page= () => {
     );
 };
 
-export default Page;
+export default FlightNumberPage;

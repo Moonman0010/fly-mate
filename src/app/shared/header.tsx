@@ -19,7 +19,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-yellow-300 shadow-md w-full z-20">
+    <header className="bg-yellow-300 shadow-md w-full z-20 sticky top-0">
       {/* Top Section */}
       <div className="flex items-center justify-between px-6 md:px-10 lg:px-12 py-4">
         {/* Logo Section */}
@@ -31,22 +31,16 @@ const Header = () => {
         {/* Navigation Links for Larger Screens */}
         <nav className="hidden md:flex gap-6">
           <a
-            href="#tagline"
+            href="/home"
             className="text-base md:text-lg font-medium transition ease-in-out duration-300 hover:bg-gray-500 px-3 py-2 rounded-md active:bg-blue-100 active:text-blue-600"
           >
             Home
           </a>
           <a
-              href="/flightnumber"
-              className="text-base md:text-lg font-medium transition ease-in-out duration-300 hover:bg-gray-500 px-3 py-2 rounded-md active:bg-blue-100 active:text-blue-600"
-          >
-            Flight Number
-          </a>
-          <a
-            href="#features"
+            href="/flightnumber"
             className="text-base md:text-lg font-medium transition ease-in-out duration-300 hover:bg-gray-500 px-3 py-2 rounded-md active:bg-blue-100 active:text-blue-600"
           >
-            Features
+            Flight Number
           </a>
           <a
             href="#contact"
@@ -60,6 +54,8 @@ const Header = () => {
         <button
           className="text-lg font-bold md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
         >
           ☰
         </button>
@@ -73,18 +69,18 @@ const Header = () => {
       >
         <nav className="flex flex-col gap-4 px-4 py-4">
           <a
-            href="#tagline"
+            href="/home"
             className="text-white font-bold hover:bg-gray-500 px-3 py-2 transition rounded-md"
             onClick={() => setIsOpen(false)}
           >
             Home
           </a>
           <a
-            href="#features"
-            className="text-white font-bold hover:gbg-gray-500 px-3 py-2 transition rounded-md"
+            href="/flightnumber"
+            className="text-white font-bold hover:bg-gray-500 px-3 py-2 transition rounded-md"
             onClick={() => setIsOpen(false)}
           >
-            Features
+            Flight Number
           </a>
           <a
             href="#contact"
@@ -100,3 +96,4 @@ const Header = () => {
 };
 
 export default Header;
+
