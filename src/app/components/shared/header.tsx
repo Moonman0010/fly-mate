@@ -37,6 +37,12 @@ const Header = () => {
             Home
           </a>
           <a
+              href="/flightnumber"
+              className="text-base md:text-lg font-medium transition ease-in-out duration-300 hover:bg-gray-500 px-3 py-2 rounded-md active:bg-blue-100 active:text-blue-600"
+          >
+            Flight Number
+          </a>
+          <a
             href="#features"
             className="text-base md:text-lg font-medium transition ease-in-out duration-300 hover:bg-gray-500 px-3 py-2 rounded-md active:bg-blue-100 active:text-blue-600"
           >
