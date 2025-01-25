@@ -3,6 +3,7 @@ import Tagline from "./tagline";
 import FlyMatePoster from "./poster";
 import About from"./about";
 import FAQ from "./faq";
+import Footer from "./contact";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <FlyMatePoster />
       <About/>
       <FAQ />
+      <Footer />
     </div>
   );
 }
