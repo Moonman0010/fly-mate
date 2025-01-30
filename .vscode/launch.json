@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Next.js API Routes",
+        "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+        "args": ["dev"],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "autoAttachChildProcesses": true,
+        "runtimeArgs": ["--inspect-brk"],
+        "env": {
+          "NODE_OPTIONS": "--inspect"
+        },
+        "skipFiles": ["<node_internals>/**"]
+      }
+    ]
+  }
+  
