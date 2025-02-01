@@ -2,19 +2,28 @@ import mongoose from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI || "";
 
+if (!MONGO_URI) {
+  throw new Error("❌ MONGO_URI is not defined in .env.local");
+}
+
+// Global connection cache to prevent multiple connections
+declare global {
+  var mongooseConnection: Promise<typeof mongoose> | null;
+}
+
 export const connectToDatabase = async () => {
-  if (mongoose.connection.readyState >= 1) {
-    console.log("✅ MongoDB already connected");
-    return;
+  if (global.mongooseConnection) {
+    console.log("✅ Using existing MongoDB connection");
+    return global.mongooseConnection;
   }
 
-  try {
-    await mongoose.connect(MONGO_URI, {
-      dbName: "flymate", // Specify your database name
-    });
-    console.log("✅ MongoDB Connected");
-  } catch (error) {
-    console.error("❌ MongoDB Connection Error:", error);
-    process.exit(1); // Exit the process if connection fails
-  }
+  console.log("🚀 Connecting to MongoDB...");
+  global.mongooseConnection = mongoose.connect(MONGO_URI, {
+    dbName: "flymate",
+    maxPoolSize: 10, // Efficient connection pooling
+  });
+
+  await global.mongooseConnection; // Ensure the connection is established
+  console.log("✅ Connected to MongoDB");
+  return global.mongooseConnection;
 };

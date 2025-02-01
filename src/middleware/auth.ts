@@ -3,16 +3,20 @@ import jwt from "jsonwebtoken";
 
 export function authenticate(req: Request) {
   try {
-    // Get the JWT token from cookies
-    const token = req.headers.get("cookie")?.split("token=")[1]?.split(";")[0];
-
-    if (!token) {
+    // Extract token from Authorization header
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json({ error: "Unauthorized - No Token" }, { status: 401 });
     }
 
+    // Get the actual token
+    const token = authHeader.split(" ")[1];
+
     // Verify JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    return decoded; // Return the user data (userId, etc.)
+    
+    // Return decoded user data
+    return decoded;
   } catch (error) {
     return NextResponse.json({ error: "Unauthorized - Invalid Token" }, { status: 401 });
   }
