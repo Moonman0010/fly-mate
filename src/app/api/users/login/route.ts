@@ -1,11 +1,11 @@
 "use server";
 
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/shared/mongo";
-import User from "@/models/user";
+import { connectToDatabase } from "@/server/shared/mongo";
+import User from "@/server/models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { AppError, handleError } from "@/shared/error";
+import { AppError, handleError } from "@/server/shared/error";
 
 export async function POST(req: Request) {
   try {

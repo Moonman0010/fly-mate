@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import User from "@/models/user";
-import { connectToDatabase } from "@/shared/mongo";
-import { sendVerificationEmail } from "@/shared/email";
+import User from "@/server/models/user";
+import { connectToDatabase } from "@/server/shared/mongo";
+import { sendVerificationEmail } from "@/server/shared/email";
 import jwt from "jsonwebtoken";
 
 export async function POST(req: Request) {

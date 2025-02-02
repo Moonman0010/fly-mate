@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/shared/mongo";
-import Chat from "@/models/chat";
-import { authenticate } from "@/middleware/auth";
-import { handleError } from "@/shared/error";
+import { connectToDatabase } from "@/server/shared/mongo";
+import Chat from "@/server/models/chat";
+import { authenticate } from "@/server/middleware/auth";
+import { handleError } from "@/server/shared/error";
 
 export async function POST(req: Request) {
   try {

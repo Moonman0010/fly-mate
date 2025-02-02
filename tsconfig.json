@@ -5,7 +5,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "outDir": "./dist",      // Ensures compiled files go to /dist
+    "rootDir": "./src",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -29,6 +33,7 @@
     "target": "ES2017"
   },
   "include": [
+   "src/**/*.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
@@ -36,6 +41,8 @@
     ",env.local"
   ],
   "exclude": [
-    "node_modules"
+    "tailwind.config.ts", 
+    "node_modules", 
+    "dist"
   ]
 }

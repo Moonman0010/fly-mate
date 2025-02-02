@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/shared/mongo";
-import Flight from "@/models/flight";
-import { authenticate } from "@/middleware/auth";
-import { AppError, handleError } from "@/shared/error";
+import { connectToDatabase } from "@/server/shared/mongo";
+import Flight from "@/server/models/flight";
+import { authenticate } from "@/server/middleware/auth";
+import { AppError, handleError } from "@/server/shared/error";
 
 export async function POST(req: Request) {
   try {

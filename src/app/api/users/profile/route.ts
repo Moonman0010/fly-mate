@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import User from "@/models/user";
-import { connectToDatabase } from "@/shared/mongo";
-import { AppError, handleError } from "@/shared/error";
+import User from "@/server/models/user";
+import { connectToDatabase } from "@/server/shared/mongo";
+import { AppError, handleError } from "@/server/shared/error";
 
 export async function GET(req: Request) {
   try {

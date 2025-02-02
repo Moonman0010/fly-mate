@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/shared/mongo";
-import Airline from "@/models/airport";
-import { handleError } from "@/shared/error";
+import { connectToDatabase } from "@/server/shared/mongo";
+import Airline from "@/server/models/airport";
+import { handleError } from "@/server/shared/error";
 
 export async function GET(req: Request) {
   try {

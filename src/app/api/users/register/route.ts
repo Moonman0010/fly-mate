@@ -1,10 +1,10 @@
 "use server"; // Ensures this runs only on the backend
 
-import { connectToDatabase } from "@/shared/mongo";
-import User from "@/models/user";
+import { connectToDatabase } from "@/server/shared/mongo";
+import User from "@/server/models/user";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import { sendVerificationEmail } from "@/shared/email";
+import { sendVerificationEmail } from "@/server/shared/email";
 import jwt from "jsonwebtoken";
 
 
