@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     }
 
     // ✅ Generate Unique Flight Identifier
-    const flightCode = `${flightNumber}-${date}`;
+    const flightCode = `${flightNumber}-${date}-${time}`;
 
     // ✅ Check if flight already exists
     let flight = await Flight.findOne({ flightCode });
