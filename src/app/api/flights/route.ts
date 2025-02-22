@@ -1,70 +1,83 @@
+// 📂 /app/api/flight/route.ts
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/server/shared/mongo";
-import Flight from "@/server/models/flight";
 import { authenticate } from "@/server/middleware/auth";
 import { AppError, handleError } from "@/server/shared/error";
+import {
+  createOrJoinFlight,
+  getFlightDetails,
+} from "@/app/controllers/flightController";
 
+/**
+ * POST /api/flight
+ * Creates or joins a flight
+ */
 export async function POST(req: Request) {
   try {
-    // ✅ Authenticate user
+    // 1. Authenticate user
     const user = authenticate(req);
-    if (user instanceof NextResponse) return user;
+    if (user instanceof NextResponse) {
+      // If authenticate returns a NextResponse, it's likely an auth failure
+      return user;
+    }
 
-    // ✅ Extract `userId` correctly
+    // 2. Extract userId from the authentication token/user object
     const userId = typeof user === "string" ? user : user.userId;
 
+    // 3. Connect to database
     await connectToDatabase();
-    let { airline, flightNumber, departure, arrival, date, time } = await req.json();
 
-    if (!flightNumber || !departure || !arrival || !date || !time) {
-      throw new AppError("All flight details are required", 400);
-    }
+    // 4. Parse request body
+    const { airline, flightNumber, departure, arrival, date, time } = await req.json();
 
-    // ✅ Generate Unique Flight Identifier
-    const flightCode = `${flightNumber}-${date}-${time}`;
+    // 5. Call the controller function
+    const result = await createOrJoinFlight({
+      userId,
+      airline,
+      flightNumber,
+      departure,
+      arrival,
+      date,
+      time,
+    });
 
-    // ✅ Check if flight already exists
-    let flight = await Flight.findOne({ flightCode });
-
-    if (flight) {
-      // ✅ Check if user is already in passengers list
-      if (!flight.passengers.includes(userId)) {
-        flight.passengers.push(userId);
-        await flight.save();
-      }
-      return NextResponse.json({ message: "Joined flight", flight }, { status: 200 });
-    }
-
-    // ✅ Create new flight
-    flight = await Flight.create({ airline, flightNumber, departure, arrival, date, time, flightCode, passengers: [userId] });
-
-    return NextResponse.json({ message: "Flight created", flight }, { status: 201 });
+    // 6. Construct HTTP response
+    return NextResponse.json(
+      { message: result.message, flight: result.flight },
+      { status: result.status }
+    );
   } catch (error) {
-    // ✅ Use centralized error handler
+    // 7. Handle errors with a centralized error handler
     const { status, body } = handleError(error);
     return NextResponse.json(body, { status });
   }
 }
 
+/**
+ * GET /api/flight?flightCode=...
+ * Gets flight details by flightCode
+ */
 export async function GET(req: Request) {
   try {
+    // 1. Connect to database
     await connectToDatabase();
+
+    // 2. Extract query params
     const { searchParams } = new URL(req.url);
-    const flightCode = searchParams.get("flightCode");
+    const flightCode = searchParams.get("flightCode") ?? "";
 
-    if (!flightCode) {
-      throw new AppError("Flight code is required", 400);
+    // 3. Call the controller function
+    const result = await getFlightDetails(flightCode);
+
+    // 4. If flight not found, return 404
+    if (!result.flight) {
+      return NextResponse.json({ error: result.message }, { status: result.status });
     }
 
-    // ✅ Fetch flight details
-    const flight = await Flight.findOne({ flightCode }).populate("departure arrival passengers");
-
-    if (!flight) {
-      return NextResponse.json({ error: "Flight not found" }, { status: 404 });
-    }
-
-    return NextResponse.json({ flight }, { status: 200 });
+    // 5. Return flight details if found
+    return NextResponse.json({ flight: result.flight }, { status: result.status });
   } catch (error) {
+    // 6. Handle errors
     const { status, body } = handleError(error);
     return NextResponse.json(body, { status });
   }

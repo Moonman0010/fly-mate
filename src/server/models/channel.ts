@@ -1,11 +1,10 @@
-// server/models/channel.ts
 import mongoose, { Schema, models } from "mongoose";
 
 const ChannelSchema = new Schema({
-  flightId: {
-    type: Schema.Types.ObjectId,
-    ref: "Flight",
+  channelId: {
+    type: String, // Use UUID for unique identifier
     required: true,
+    unique: true, // Ensure uniqueness
     index: true,
   },
   name: {
@@ -14,14 +13,20 @@ const ChannelSchema = new Schema({
   },
   type: {
     type: String,
-    enum: ["text", "category"],
-    default: "text",
+    enum: ["main", "sub"], // Defines "main" and "sub" channels
+    required: true,
   },
   parentId: {
-    type: Schema.Types.ObjectId,
-    ref: "Channel",
+    type: String, // UUID of the parent main channel (if sub-channel)
     default: null,
+    index: true, // Optimize queries on parentId
   },
+  users: [
+    {
+      type: String, // Store user IDs
+      required: true,
+    },
+  ],
 });
 
 const Channel = models.Channel || mongoose.model("Channel", ChannelSchema);
